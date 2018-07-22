@@ -1,0 +1,21 @@
+.small-icon{
+    font-size: 14px !important;
+}
+.inputbox{
+    background-color: aqua;
+    border: none !important;
+    color: black !important;
+}
+#form input{
+    margin-bottom: 0px !important;
+    width: 50% !important;
+   
+}
+#form label{
+    color:inherit !important;
+    top:12px;
+}
+
+.formpaper{
+    padding: 20px;
+}

@@ -27,3 +27,20 @@
     bottom: 10px;
     width: 60%;
   }
+
+  .filters1{
+    border:none;
+    padding:0;
+    font-weight: bold;
+    position: relative;
+    bottom: 10px;
+  }
+  
+  .filters2{
+    border:none;
+    padding:0;
+    font-weight: bold;
+    position: relative;
+    bottom: 10px;
+    width: 70%;
+  }

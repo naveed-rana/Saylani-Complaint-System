@@ -130,9 +130,9 @@ componentDidUpdate(){
                   {complaint.requester_name}
                 </Typography>
               </Grid>
-              <Grid item sm={1} md={1}>
+              <Grid item sm={2} md={2}>
                 <Typography variant="body1" align="center">
-                  {complaint.branch_incharge}
+                  {complaint.brach_name}
                 </Typography>
               </Grid>
               <Grid item sm={3} md={3}>
@@ -140,7 +140,7 @@ componentDidUpdate(){
                   {complaint.complaint_discription}
                 </Typography>
               </Grid>
-              <Grid item sm={2} md={2} align="center">
+              <Grid item sm={1} md={1} align="center">
                 <Typography variant="body1">
                   {complaint.priority_level}
                 </Typography>

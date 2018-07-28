@@ -15,6 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import ProgressCircle from '../../ProgressCircle';
 import {startGetUser} from '../../../actions';
 import ChatArea from './chat';
+import BranchName from './getBranchNames';
 
 const styles = theme => ({
   root: {
@@ -83,8 +84,16 @@ class AdminHome extends React.Component {
 
   statusHandler = e =>{
     const {data} = this.state;
+    if(e.target.value === 'nill')
+    {
+      this.setState({data:data});
+    }
+    else{
     const result = data.filter(complaint => complaint.complaint_status === e.target.value);
-    this.setState({data:result});
+    console.log('================fss====================');
+    console.log(result);
+    console.log('====================================');
+    this.setState({data:result});}
   }
 
   render() {
@@ -108,9 +117,17 @@ class AdminHome extends React.Component {
                 Requester
               </Typography>
             </Grid>
-            <Grid item sm={1} md={1} align="center">
+            <Grid item sm={2} md={2} align="center">
               <Typography variant="body2">
-                Branch Incharge
+                <select className="selectlist filters" onChange={(e)=>this.branchNameHandler(e)}>
+                <option selected disabled>Branch Name</option>
+                  <option value="nill">Branch Name</option>
+                  {this.state.copyData.map((complaint,i)=>{
+                    return(
+                      <BranchName key={i} name={complaint.brach_name} />
+                    )
+                  })}
+                </select>
               </Typography>
             </Grid>
             <Grid item sm={3} md={3}>
@@ -118,10 +135,11 @@ class AdminHome extends React.Component {
                 Complaint Discription
               </Typography>
             </Grid>
-            <Grid item sm={2} md={2}>
+            <Grid item sm={1} md={1}>
               <Typography variant="body2" align="center">
-                <select className="selectlist filters" onChange={(e)=>this.priorityHandler(e)}>
-                  <option value="nill">Priority Level</option>
+                <select className="selectlist filters1" onChange={(e)=>this.priorityHandler(e)}>
+                 <option selected disabled>Priority Level</option>
+                  <option value="nill">All Priorities</option>
                   <option value="High">Priority High</option>
                   <option value="Medium">Priority Medium</option>
                   <option value="Low">Priority Low</option>
@@ -135,7 +153,8 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={1} md={1}>
               <Typography variant="body2" >
-              <select className="selectlist filters" onChange={(e)=>this.statusHandler(e)}>
+              <select className="selectlist filters2" onChange={(e)=>this.statusHandler(e)}>
+              <option selected disabled>Status</option>
                   <option value="nill">Status</option>
                   <option value="pending">pending</option>
                   <option value="Resolved">Resolved</option>

@@ -18,7 +18,7 @@ const styles = theme => ({
         margin: theme.spacing.unit
     },
     paper: {
-        width: window.innerWidth - 140,
+        width: '90vw',
         padding: 20,
         paddingRight: 80,
         textAlign: 'center'

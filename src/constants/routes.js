@@ -13,3 +13,4 @@ export const ADMINCOMPLAINTS = '/admin/complaints';
 export const NEWMANGER = '/admin/add-manager';
 export const MANAGERS = '/admin/managers';
 export const ADMINACCOUNT = '/admin/account';
+export const HISTORY = '/home/history';

@@ -17,6 +17,7 @@ import {startGetUser} from '../../actions/index';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Icon from '@material-ui/core/Icon';
+import History from '../History';
 
 class HomePage extends Component {
   state = {
@@ -64,6 +65,13 @@ class HomePage extends Component {
         component={Link} to={routes.SHOW_COMPLAINTS}
         />
 
+        
+        <BottomNavigationAction
+         className="buttomNavigation"
+          label="History" 
+          component={Link} to={routes.HISTORY}
+          icon={<Icon>history</Icon>} />
+
         <BottomNavigationAction
          className="buttomNavigation"
           label="Account" 
@@ -82,7 +90,6 @@ class HomePage extends Component {
               
                 <Grid container spacing={8}> 
                 <Grid item sm={1} md={1}>
-                  
                 </Grid>  
                 <Grid item sm={10} md={10}>
                   
@@ -94,6 +101,7 @@ class HomePage extends Component {
                   path={routes.SHOW_COMPLAINTS}
                   component={() =>< ShowComplaints />}/>
                 <Route exact path={routes.ACCOUNT} component={() =>< Account />}/>
+                <Route exact path={routes.HISTORY} component={() =>< History />}/>
 
                  </Grid>
 

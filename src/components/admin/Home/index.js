@@ -32,8 +32,13 @@ const styles = theme => ({
     padding: 15,
     borderRadius: '0'
   },
+  paper1: {
+    marginBottom:10,
+    padding: 15,
+    borderRadius: '0'
+  },
   fixdWidth:{
-    minWidth:900,
+    width:'90vw',
     overflowX: 'auto'
   },
   messageshow:{
@@ -141,8 +146,13 @@ class AdminHome extends React.Component {
     var no = 0;
 
     return (
+      
       <div className={classes.fixdWidth}>
-
+       <Paper className={classes.paper1} elevation={5}>
+                        <Typography variant="title">
+                            Complaints Portal
+                        </Typography>
+                    </Paper>
         <Paper className={classes.paper} elevation={1}>
           <Grid container spacing={8}>
             <Grid item sm={1} md={1}>
@@ -219,9 +229,14 @@ class AdminHome extends React.Component {
                 );
               })
               :
-              <Typography className={classes.messageshow} variant="display2" align='center'>
-              No Complaint Yet!....
-            </Typography>
+              <Grid container spacing={8}> 
+                <Grid item sm={12} md={12}>
+                <Typography className={classes.messageshow} variant="display2" align='center'>
+                No Complaint Yet!....
+               </Typography>
+                </Grid>
+              </Grid>
+              
             : 
             <ProgressCircle />}
           <Table>

@@ -17,7 +17,7 @@ import {startGetManagers} from '../../../actions/newManager';
 
 const styles = theme => ({
     root: {
-        width: '80vw',
+        width: '90vw',
         marginTop: theme.spacing.unit * 3,
         textAlign: 'left'
     },
@@ -29,7 +29,7 @@ const styles = theme => ({
     },
     paper:{
         padding:15,
-        width:'80vw'
+        width:'90vw'
     }
 });
 

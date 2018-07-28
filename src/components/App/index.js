@@ -37,7 +37,7 @@ const App = () =>
         <Route exact path={routes.SHOW_COMPLAINTS} component={() => <HomePage />}/>
         <Route exact path={routes.ADD_COMPLAINT} component={() => <HomePage />}/>
         <Route exact path={routes.ACCOUNT} component={() => <HomePage />}/>
-
+        <Route exact path={routes.HISTORY} component={() => <HomePage />}/>
                             <ToastContainer
                     position="top-right"
                     autoClose={3000}

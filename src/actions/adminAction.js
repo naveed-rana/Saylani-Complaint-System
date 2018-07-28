@@ -24,7 +24,7 @@ export function startGetRequesterComplaints() {
             var usercomplaints=[];
                   snapshot.forEach(element => { 
                       let data = element.val();
-                      if(data.complaint_status !=='confirm resolved'){
+                      if(data.complaint_status !=='confirm resolved' && data.complaint_status !=='deleted'){
                        usercomplaints.push({
                            id:element.key,
                           ...data

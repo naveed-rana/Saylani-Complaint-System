@@ -21,7 +21,7 @@ import History from '../History';
 
 class HomePage extends Component {
   state = {
-    value: 3,
+    value: 4,
   };
   componentDidMount() {
     this.props.startGetUser();

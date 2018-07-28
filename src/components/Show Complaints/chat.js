@@ -15,6 +15,12 @@ import {startGetUser} from '../../actions';
 import {startAddNewMessage,startGetMessage} from '../../actions/chatActions';
 import {updateComplaintStatus} from '../../actions/adminAction';
 import ReactDOM  from 'react-dom';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 
 const styles = theme => ({
@@ -77,9 +83,11 @@ class ChatArea extends Component {
         this.state = {
           message:'',
           expanded: null,
+          open: false,
         };
         this.sendMessage = this.sendMessage.bind(this);
         this.statusHandler = this.statusHandler.bind(this);
+        this.statusHandlerDelete = this.statusHandlerDelete.bind(this);
       }
 
 sendMessage(complinat_id){
@@ -110,11 +118,10 @@ handleChange = panel => (event, expanded) => {
       }}
 
       statusHandler(complaintid){
-        
-       let confirm =  window.confirm("are you sure?");
-       if(confirm){
-        this.props.updateComplaintStatus(complaintid,"confirm resolved");
-       }
+       this.handleClickOpen(complaintid,"confirm resolved");
+      }
+      statusHandlerDelete(complaintid){
+       this.handleClickOpen(complaintid,"deleted");
       }
 
       scrollToBottom = (id) => {
@@ -136,7 +143,19 @@ handleChange = panel => (event, expanded) => {
               + currentdate.getSeconds();
           return datetime;
      }
-    
+     handleClickOpen = (complaintid,status) => {
+      this.setState({ open: true,complaintid,status });
+    };
+  
+    handleClose = () => {
+      this.setState({ open: false });
+    };
+   
+    handleCloseAgree = () => {
+      this.setState({ open: false });
+      this.props.updateComplaintStatus(this.state.complaintid,this.state.status);
+     
+    };
 
     render() {
         const {classes,chatState,complaint,no} = this.props;
@@ -144,6 +163,31 @@ handleChange = panel => (event, expanded) => {
        
         return (
             <div>
+              <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+
+              <DialogTitle id="alert-dialog-title">{"Confirmation!"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+            After click on ok take an action and update the complaint status,if you only click on cancel then only close the confirmation message nothing will be happen,Are you sure ?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              cancel
+            </Button>
+            <Button onClick={this.handleCloseAgree} color="primary" autoFocus>
+              ok
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+
+
             <ExpansionPanel
               expanded={expanded === complaint.id}
               onChange={this.handleChange(complaint.id)}>
@@ -176,7 +220,7 @@ handleChange = panel => (event, expanded) => {
                       <b>Resolved <br/><a className="statusconfirmed" onClick={()=>this.statusHandler(complaint.id)}> Confirm Resolved</a></b>
                       :
                       complaint.complaint_status==='Rejected'?
-                      <b>Rejected <br/><a className="statusconfirmed" onClick={()=>this.statusHandler(complaint.id)}>Delete</a></b> :
+                      <b>Rejected <br/><a className="statusconfirmed" onClick={()=>this.statusHandlerDelete(complaint.id)}>Delete</a></b> :
                       "pending"
                     }
                     </Typography>

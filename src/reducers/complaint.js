@@ -1,4 +1,4 @@
-import {ADD_COMPLAINT,GET_USER_COMPLAINT,CLEARFLAG,GETID} from '../actions';
+import {ADD_COMPLAINT,GET_USER_COMPLAINT,CLEARFLAG,GETID,GETHISTORY} from '../actions';
 import {
   applySetComplaint,
   applyGetComplaint
@@ -10,7 +10,9 @@ let INITIAL_STATE = {
 complaints:[],
 flag:false,
 addflag:false,
-complaintId:null
+complaintId:null,
+historyComlaint:[],
+historyFlag:false
 
 }
 
@@ -40,7 +42,14 @@ function complaintReducer(state = INITIAL_STATE, action) {
           complaintId:action.complaintId
         }
       }
-      
+      case GETHISTORY:{
+           return {
+             ...state,
+             historyFlag:true,
+             historyComlaint:action.historycomplaints
+           }
+      }
+
       default : return state;
     }
   }

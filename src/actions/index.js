@@ -1,12 +1,14 @@
 import {db} from '../firebase/firebase';
 import {auth} from 'firebase';
 import {doAddNewComplaint,onceGetUser} from '../firebase/db';
+import { HISTORY } from '../constants/routes';
 export const ADD_COMPLAINT = 'ADD_COMPLAINT';
 export const GET_USER_COMPLAINT = 'GET_USER_COMPLAINT';
 export const GETUSER = 'GETUSER';
 export const FLAG ='Flag';
 export const CLEARFLAG = 'CLEARFLAG';
 export const GETID = 'GETID';
+export const GETHISTORY = 'GETHISTOORY';
 
 
 function getUserComplaint(complaints) {
@@ -36,7 +38,7 @@ export function startGetUserComplaints(userid) {
             var usercomplaints = [];
             snapshot.forEach(element => {
                 let complaint = element.val();
-                if (complaint.requester === userid && complaint.complaint_status !=='confirm resolved'){
+                if (complaint.requester === userid && complaint.complaint_status !=='confirm resolved' && complaint.complaint_status !=='deleted'){
                     usercomplaints.push({
                         id:element.key,
                         ...element.val()
@@ -48,6 +50,35 @@ export function startGetUserComplaints(userid) {
         })
     }
 }
+
+function getUserComplaintHistory(historycomplaints) {
+    return{
+        type:GETHISTORY,
+        historycomplaints
+    }
+}
+
+export function startGetUserComplaintsHistory(uid){ 
+    return (dispatch) =>{
+        
+        db.ref('complaints').on('value',(snapshot)=>{
+                var usercomplaints = [];
+                snapshot.forEach(element => {
+                    let complaint = element.val();
+                    if (complaint.requester === uid && (complaint.complaint_status ==='confirm resolved' || complaint.complaint_status ==='deleted')){
+                        usercomplaints.push({
+                            ...element.val()
+                        });
+                    }
+                });
+            
+                dispatch(getUserComplaintHistory(usercomplaints));
+            })
+        }
+
+}
+
+
 
 function addComplaint(newComplaint) {
    

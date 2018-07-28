@@ -82,14 +82,9 @@ class AdminHome extends React.Component {
   }
 
   statusHandler = e =>{
-    const {copyData} = this.state;
-    if(e.target.value === 'nill')
-    {
-      this.setState({data:copyData});
-    }
-    else{
-    const result = copyData.filter(complaint => complaint.complaint_status === e.target.value);
-    this.setState({data:result});}
+    const {data} = this.state;
+    const result = data.filter(complaint => complaint.complaint_status === e.target.value);
+    this.setState({data:result});
   }
 
   render() {

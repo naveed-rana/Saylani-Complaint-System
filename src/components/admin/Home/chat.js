@@ -125,17 +125,22 @@ componentDidUpdate(){
                   {no}
                 </Typography>
               </Grid>
-              <Grid item sm={2} md={2}>
+              <Grid item sm={1} md={1}>
                 <Typography variant="body1">
                   {complaint.requester_name}
                 </Typography>
               </Grid>
+              <Grid item sm={1} md={1}>
+                <Typography variant="body1" align="center">
+                  {complaint.branch_incharge}
+                </Typography>
+              </Grid>
               <Grid item sm={3} md={3}>
-                <Typography variant="body1">
+                <Typography variant="body1" align="center">
                   {complaint.complaint_discription}
                 </Typography>
               </Grid>
-              <Grid item sm={1} md={1} align="center">
+              <Grid item sm={2} md={2} align="center">
                 <Typography variant="body1">
                   {complaint.priority_level}
                 </Typography>
@@ -145,7 +150,7 @@ componentDidUpdate(){
                   {complaint.special_request}
                 </Typography>
               </Grid>
-              <Grid item sm={2} md={2}>
+              <Grid item sm={1} md={1}>
                 <Typography variant="body1" align="center">
                 <select className="selectlist" onChange={(e)=>this.statusHandler(e,complaint.id)}>
                 <option  disabled selected>{complaint.complaint_status}</option>

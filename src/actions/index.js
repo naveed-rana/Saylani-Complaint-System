@@ -6,6 +6,7 @@ export const GET_USER_COMPLAINT = 'GET_USER_COMPLAINT';
 export const GETUSER = 'GETUSER';
 export const FLAG ='Flag';
 export const CLEARFLAG = 'CLEARFLAG';
+export const GETID = 'GETID';
 
 
 function getUserComplaint(complaints) {
@@ -110,5 +111,22 @@ export function unsetuser() {
 export function clearFlag() {
     return {
         type:CLEARFLAG
+    }
+}
+
+function getComplaintId(id) {
+    return{
+        type:GETID,
+        complaintId:id
+    }
+}
+export function startGetComplaintId() {
+    return(dispatch) =>{
+        
+    db.ref('complaints').limitToLast(1).on('child_added',(snapshot)=>{
+        console.log(snapshot.val().id);
+        
+        dispatch(getComplaintId(snapshot.val().id));
+    })
     }
 }

@@ -25,9 +25,9 @@ export const doAddNewComplaint = (newComplaint) =>
       ...message
     });
 
-    export const onceGetMessages = (id) =>
+ export const onceGetMessages = (id) =>
     db.ref(`chat/${id}`).once('value');
 
-    export const complaintStatusUpdate = (id,value) =>
+ export const complaintStatusUpdate = (id,value) =>
        db.ref(`complaints/${id}/complaint_status`).set(value);
-  
+

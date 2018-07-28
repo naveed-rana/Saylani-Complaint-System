@@ -104,7 +104,7 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={1} md={1} align="center">
               <Typography variant="body2">
-                Branch
+                Branch Incharge
               </Typography>
             </Grid>
             <Grid item sm={3} md={3}>
@@ -123,23 +123,18 @@ class AdminHome extends React.Component {
               </Typography>
             </Grid>
             <Grid item sm={2} md={2}>
-              <Typography variant="body2" align="center">
+              <Typography variant="body2" >
                 Special Request
               </Typography>
             </Grid>
-            <Grid item sm={2} md={2}>
-              <Typography variant="body2">
+            <Grid item sm={1} md={1}>
+              <Typography variant="body2" >
                 Status
               </Typography>
             </Grid>
             <Grid item sm={1} md={1}>
               <Typography variant="body2">
-                <select className="selectlist filters" onChange={(e)=>this.statusHandler(e)}>
-                  <option value="nill">Created At</option>
-                  <option value="High">Desc</option>
-                  <option value="Medium">asyc</option>
-                  <option value="Low"></option>
-                </select>
+                Created At
               </Typography>
             </Grid>
           </Grid>

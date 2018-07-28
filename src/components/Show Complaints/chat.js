@@ -201,12 +201,11 @@ handleChange = panel => (event, expanded) => {
                     Admin
                   </Typography>
                 </Grid>
-              
                 <Grid item sm={12} md={12} id={complaint.id} className={classes.messageContainer}>
-                {chatState.chat.map((messages)=>{
+                {chatState.chat.map((messages,i)=>{
                     return (
                         
-                      <Grid container key={messages.uid + messages.createdAt}  spacing={8}> 
+                      <Grid container key={i}  spacing={8}> 
                      <Grid item sm={6} md={6}>
                       {messages.userid !== this.props.user.uid ?
                         <div>

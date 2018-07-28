@@ -106,10 +106,10 @@ class ShowComplaints extends React.Component {
           {flag
             ? this.props.myComplaints
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(complaint => {
+              .map((complaint,i) => {
                 no++;
                 return (
-                  <ChatArea key={complaint.id} complaint={complaint} no={no} />
+                  <ChatArea key={i} complaint={complaint} no={no} />
                 );
               })
             : 

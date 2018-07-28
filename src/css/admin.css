@@ -19,3 +19,11 @@
 .formpaper{
     padding: 20px;
 }
+.filters{
+    border:none;
+    padding:0;
+    font-weight: bold;
+    position: relative;
+    bottom: 10px;
+    width: 60%;
+  }

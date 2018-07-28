@@ -25,7 +25,13 @@ class NewComplaint extends Component {
         if(nextProps.flag){
             toast.success("Your Complaint Successfully added!");
             this.props.clearFlag();
-            this.props.history.push('/home/show-complaints');
+            this.setState({
+            city_incharge : '',
+            brach_incharge : '',
+            complaint_discription : '',
+            priority_level : '',
+            loading:false
+            })
         }
     }
    
@@ -76,6 +82,7 @@ class NewComplaint extends Component {
 
                                                 <span className="helper-text labels" data-error="wrong" data-success="right">City Incharge</span>
                                                 <input
+                                                    value={city_incharge}
                                                     type="text"
                                                     id="autocomplete-input"
                                                     required
@@ -86,7 +93,7 @@ class NewComplaint extends Component {
                                             <div className="input-field col s12 m6">
                                                 <span className="helper-text labels" data-error="wrong" data-success="right">Branch Incharge</span>
                                                 <input
-                                                
+                                                value={brach_incharge}
                                                 onChange={event => this.setState(updateByPropertyName('brach_incharge', event.target.value))}
                                                     type="text"
                                                     id="autocomplete-input"
@@ -100,6 +107,7 @@ class NewComplaint extends Component {
                                         <div className="input-field col s12 m12">
                                             <span className="helper-text labels" data-error="wrong" data-success="right">Complaint Description</span>
                                             <textarea 
+                                            value={complaint_discription}
                                             onChange={event => this.setState(updateByPropertyName('complaint_discription', event.target.value))}
                                             required
                                              cols="30" rows="20"></textarea>

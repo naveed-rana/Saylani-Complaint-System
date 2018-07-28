@@ -44,6 +44,7 @@ class AdminHome extends React.Component {
 
     this.state = {
       data: [],
+      copyData:[],
       page: 0,
       rowsPerPage: 5,
 
@@ -57,7 +58,8 @@ class AdminHome extends React.Component {
       this.props.startGetUser();
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({data:nextProps.allcomplaints})
+    this.setState({data:nextProps.allcomplaints,
+                  copyData:nextProps.allcomplaints})
   }
   
   handleChangePage = (event, page) => {
@@ -68,6 +70,16 @@ class AdminHome extends React.Component {
     this.setState({rowsPerPage: event.target.value});
   };
 
+  statusHandler = e =>{
+    const {copyData} = this.state;
+    if(e.target.value === 'nill')
+    {
+      this.setState({data:copyData});
+    }
+    else{
+    const result = copyData.filter(complaint => complaint.priority_level === e.target.value);
+    this.setState({data:result});}
+  }
 
   render() {
 
@@ -85,19 +97,29 @@ class AdminHome extends React.Component {
                 No.
               </Typography>
             </Grid>
-            <Grid item sm={2} md={2}>
+            <Grid item sm={1} md={1} align="center">
               <Typography variant="body2">
                 Requester
               </Typography>
             </Grid>
-            <Grid item sm={3} md={3}>
+            <Grid item sm={1} md={1} align="center">
               <Typography variant="body2">
+                Branch
+              </Typography>
+            </Grid>
+            <Grid item sm={3} md={3}>
+              <Typography variant="body2" align="center">
                 Complaint Discription
               </Typography>
             </Grid>
-            <Grid item sm={1} md={1}>
+            <Grid item sm={2} md={2}>
               <Typography variant="body2" align="center">
-                Priority Level
+                <select className="selectlist filters" onChange={(e)=>this.statusHandler(e)}>
+                  <option value="nill">Priority Level</option>
+                  <option value="High">Priority High</option>
+                  <option value="Medium">Priority Medium</option>
+                  <option value="Low">Priority Low</option>
+                </select>
               </Typography>
             </Grid>
             <Grid item sm={2} md={2}>
@@ -122,10 +144,10 @@ class AdminHome extends React.Component {
           {flag
             ? data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(complaint => {
+              .map((complaint,i) => {
                 no++;
                 return (
-               <ChatArea key={complaint.id} complaint={complaint} no={no} />
+               <ChatArea key={i} complaint={complaint} no={no} />
                 );
               })
             : 

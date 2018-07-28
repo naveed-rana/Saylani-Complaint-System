@@ -176,9 +176,10 @@ componentDidUpdate(){
               <Grid item sm={12} md={12} id={complaint.id} className={classes.messageContainer}>
                 {chatState
                   .chat
-                  .map((messages) => {
+                  .map((messages,i) => {
+                    console.log(i);
                     return (
-                     <MessageShow key={messages.uid+messages.createdAt} messages={messages} admin={this.props.admin} />
+                     <MessageShow key={i} messages={messages} admin={this.props.admin} />
                     )
                   })}
         

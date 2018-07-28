@@ -50,6 +50,7 @@ class AdminHome extends React.Component {
     this.state = {
       data: [],
       copyData:[],
+      branches:[],      
       page: 0,
       rowsPerPage: 5,
 
@@ -63,8 +64,16 @@ class AdminHome extends React.Component {
       this.props.startGetUser();
   }
   componentWillReceiveProps(nextProps) {
+    var branches = [];
+   nextProps.allcomplaints.forEach(item => {
+	if(branches.indexOf(item.brach_name) === -1){
+		branches.push(item.brach_name);
+	}
+});
+
     this.setState({data:nextProps.allcomplaints,
-                  copyData:nextProps.allcomplaints})
+                  copyData:nextProps.allcomplaints,
+                branches})
   }
   
   handleChangePage = (event, page) => {
@@ -151,9 +160,9 @@ class AdminHome extends React.Component {
                 <select ref="branchRef" className="selectlist filters" onChange={()=>this.filterHandler()}>
                 <option value="nill" selected disabled>Branch Name</option>
                   <option value="nill">All Branches</option>
-                  {this.state.copyData.map((complaint,i)=>{
+                  {this.state.branches.map((complaint,i)=>{
                     return(
-                      <BranchName key={i} name={complaint.brach_name} />
+                      <BranchName key={i} name={complaint} />
                     )
                   })}
                 </select>

@@ -124,9 +124,12 @@ export function startGetComplaintId() {
     return(dispatch) =>{
         
     db.ref('complaints').limitToLast(1).on('child_added',(snapshot)=>{
-        console.log(snapshot.val().id);
-        
+        alert(snapshot.val().id);
+        if(snapshot.val().id){
         dispatch(getComplaintId(snapshot.val().id));
+        }else{
+            dispatch(getComplaintId(1));
+        }
     })
     }
 }

@@ -70,7 +70,7 @@ class AdminHome extends React.Component {
     this.setState({rowsPerPage: event.target.value});
   };
 
-  statusHandler = e =>{
+  priorityHandler = e =>{
     const {copyData} = this.state;
     if(e.target.value === 'nill')
     {
@@ -78,6 +78,17 @@ class AdminHome extends React.Component {
     }
     else{
     const result = copyData.filter(complaint => complaint.priority_level === e.target.value);
+    this.setState({data:result});}
+  }
+
+  statusHandler = e =>{
+    const {copyData} = this.state;
+    if(e.target.value === 'nill')
+    {
+      this.setState({data:copyData});
+    }
+    else{
+    const result = copyData.filter(complaint => complaint.complaint_status === e.target.value);
     this.setState({data:result});}
   }
 
@@ -114,7 +125,7 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={2} md={2}>
               <Typography variant="body2" align="center">
-                <select className="selectlist filters" onChange={(e)=>this.statusHandler(e)}>
+                <select className="selectlist filters" onChange={(e)=>this.priorityHandler(e)}>
                   <option value="nill">Priority Level</option>
                   <option value="High">Priority High</option>
                   <option value="Medium">Priority Medium</option>
@@ -129,7 +140,12 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={1} md={1}>
               <Typography variant="body2" >
-                Status
+              <select className="selectlist filters" onChange={(e)=>this.statusHandler(e)}>
+                  <option value="nill">Status</option>
+                  <option value="pending">pending</option>
+                  <option value="Resolved">Resolved</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
               </Typography>
             </Grid>
             <Grid item sm={1} md={1}>

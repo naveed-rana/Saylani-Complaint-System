@@ -16,7 +16,6 @@ class NewComplaint extends Component {
             complaint_discription: '',
             priority_level: '',
             loading: false,
-            complaintId:null
         }
         this.onSubmit = this
             .onSubmit
@@ -30,9 +29,7 @@ class NewComplaint extends Component {
     componentWillReceiveProps(nextProps) {
         console.log(nextProps);
         this.setState({loading: false});
-        if(nextProps.complaintId){
-            this.setState({complaintId:nextProps.complaintId+1});
-        }
+  
         if (nextProps.flag) {
             toast.success("Your Complaint Successfully added!");
             this
@@ -56,7 +53,7 @@ class NewComplaint extends Component {
         var datetime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
         var new_complaint = {
-            id:this.refs.id.value++,
+            id:this.props.complaintId++,
             requester: this.props.user.uid,
             city_incharge: this.state.city_incharge,
             brach_incharge: this.state.brach_incharge,
@@ -102,8 +99,8 @@ class NewComplaint extends Component {
 
                                                     <span className="helper-text labels" data-error="wrong" data-success="right">Complaint ID</span>
                                                     <input
-                                                        ref="id"
-                                                        value={complaintId}
+                                                
+                                                        value={this.props.complaintId++}
                                                         readOnly
                                                         type="text"
                                                         id="autocomplete-input343"

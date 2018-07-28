@@ -23,7 +23,7 @@ class NewComplaint extends Component {
     }
 
     componentDidMount() {
-        this.props.startGetComplaintId();
+        //this.props.startGetComplaintId();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -53,7 +53,7 @@ class NewComplaint extends Component {
         var datetime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
         var new_complaint = {
-            id:this.props.complaintId++,
+
             requester: this.props.user.uid,
             city_incharge: this.state.city_incharge,
             brach_incharge: this.state.brach_incharge,
@@ -100,7 +100,7 @@ class NewComplaint extends Component {
                                                     <span className="helper-text labels" data-error="wrong" data-success="right">Complaint ID</span>
                                                     <input
                                                 
-                                                        value={this.props.complaintId++}
+                                                        value="21"
                                                         readOnly
                                                         type="text"
                                                         id="autocomplete-input343"

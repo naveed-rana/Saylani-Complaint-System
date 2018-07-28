@@ -35,6 +35,10 @@ const styles = theme => ({
   fixdWidth:{
     minWidth:900,
     overflowX: 'auto'
+  },
+  messageshow:{
+    marginTop:20,
+    padding:30
   }
 
 });
@@ -71,30 +75,55 @@ class AdminHome extends React.Component {
     this.setState({rowsPerPage: event.target.value});
   };
 
-  priorityHandler = e =>{
-    const {copyData} = this.state;
-    if(e.target.value === 'nill')
-    {
-      this.setState({data:copyData});
-    }
+ 
+
+
+  filterHandler = () =>{
+     const priority = this.refs.priorityRef.value;
+     const status = this.refs.statusRef.value;
+     const branch = this.refs.branchRef.value;
+     
+     
+     console.log(branch);
+     console.log(status);
+     console.log(priority);
+     const {copyData} = this.state;
+
+     if(priority === 'nill' && status === 'nill' && branch === 'nill'){
+       
+        this.setState({data:copyData});
+     }
+     else if (priority === 'nill' && status === 'nill'){
+      const result = copyData.filter(complaint => complaint.brach_name === branch);
+      this.setState({data:result});
+     }
+     else if (priority === 'nill' && branch === 'nill'){
+      const result = copyData.filter(complaint => complaint.complaint_status === status);
+      this.setState({data:result});
+     }
+     else if (status === 'nill' && branch === 'nill'){
+      const result = copyData.filter(complaint => complaint.priority_level === priority);
+      this.setState({data:result});
+     }
+     else if (priority === 'nill'){
+      const result = copyData.filter(complaint => complaint.complaint_status === status && complaint.brach_name === branch);
+      this.setState({data:result});
+     }
+     else if (status === 'nill'){
+      const result = copyData.filter(complaint => complaint.priority_level === priority && complaint.brach_name === branch);
+      this.setState({data:result});
+     }
+     else if (branch === 'nill'){
+      const result = copyData.filter(complaint => complaint.complaint_status === status && complaint.priority_level === priority);
+      this.setState({data:result});
+     }
     else{
-    const result = copyData.filter(complaint => complaint.priority_level === e.target.value);
-    this.setState({data:result});}
+      const result = copyData.filter(complaint => complaint.priority_level === priority && complaint.brach_name === branch && complaint.complaint_status === status);
+      this.setState({data:result});
+    }
+   
   }
 
-  statusHandler = e =>{
-    const {data} = this.state;
-    if(e.target.value === 'nill')
-    {
-      this.setState({data:data});
-    }
-    else{
-    const result = data.filter(complaint => complaint.complaint_status === e.target.value);
-    console.log('================fss====================');
-    console.log(result);
-    console.log('====================================');
-    this.setState({data:result});}
-  }
 
   render() {
 
@@ -119,9 +148,9 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={2} md={2} align="center">
               <Typography variant="body2">
-                <select className="selectlist filters" onChange={(e)=>this.branchNameHandler(e)}>
-                <option selected disabled>Branch Name</option>
-                  <option value="nill">Branch Name</option>
+                <select ref="branchRef" className="selectlist filters" onChange={()=>this.filterHandler()}>
+                <option value="nill" selected disabled>Branch Name</option>
+                  <option value="nill">All Branches</option>
                   {this.state.copyData.map((complaint,i)=>{
                     return(
                       <BranchName key={i} name={complaint.brach_name} />
@@ -137,8 +166,8 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={1} md={1}>
               <Typography variant="body2" align="center">
-                <select className="selectlist filters1" onChange={(e)=>this.priorityHandler(e)}>
-                 <option selected disabled>Priority Level</option>
+                <select ref="priorityRef" className="selectlist filters1" onChange={()=>this.filterHandler()}>
+                 <option value="nill" selected disabled>Priority Level</option>
                   <option value="nill">All Priorities</option>
                   <option value="High">Priority High</option>
                   <option value="Medium">Priority Medium</option>
@@ -153,16 +182,16 @@ class AdminHome extends React.Component {
             </Grid>
             <Grid item sm={1} md={1}>
               <Typography variant="body2" >
-              <select className="selectlist filters2" onChange={(e)=>this.statusHandler(e)}>
-              <option selected disabled>Status</option>
-                  <option value="nill">Status</option>
+              <select ref="statusRef" className="selectlist filters1" onChange={()=>this.filterHandler()}>
+              <option value="nill" selected disabled>Status</option>
+                  <option value="nill">All Status</option>
                   <option value="pending">pending</option>
                   <option value="Resolved">Resolved</option>
                   <option value="Rejected">Rejected</option>
                 </select>
               </Typography>
             </Grid>
-            <Grid item sm={1} md={1}>
+            <Grid item sm={1} md={1} align="center">
               <Typography variant="body2">
                 Created At
               </Typography>
@@ -172,14 +201,18 @@ class AdminHome extends React.Component {
 
         <div className={classes.root}>
           {flag
-            ? data
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            ? data.length>0 ?
+              data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((complaint,i) => {
                 no++;
                 return (
                <ChatArea key={i} complaint={complaint} no={no} />
                 );
               })
+              :
+              <Typography className={classes.messageshow} variant="display2" align='center'>
+              No Complaint Yet!....
+            </Typography>
             : 
             <ProgressCircle />}
           <Table>

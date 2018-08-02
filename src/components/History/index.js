@@ -109,7 +109,7 @@ class History extends React.Component {
                                     <TableCell >Complaint Status</TableCell>
                                     <TableCell className="textRight">Created At 
 
-                                        <b><a onClick={()=>this.createJsPDF(historyComlaint,page,rowsPerPage)} >Download PDF</a></b>
+                                        <br/><b><a onClick={()=>this.createJsPDF(historyComlaint,page,rowsPerPage)} >Download PDF</a></b>
                                     </TableCell>
                                     {/* <TableCell >DeleteAll</TableCell> */}
                                 </TableRow>

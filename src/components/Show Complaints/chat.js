@@ -72,6 +72,9 @@ const styles = theme => ({
     },
     timeStamp:{
     paddingRight:20
+    },
+    topBar:{
+      backgroundColor:'peachpuff'
     }
   });
 
@@ -239,7 +242,7 @@ handleChange = panel => (event, expanded) => {
               <ExpansionPanelDetails >
               <Grid container spacing={8} className={classes.details} > 
 
-                <Grid item sm={12} md={12}>
+                <Grid item sm={12} md={12} className={classes.topBar}>
                   <Typography variant="title"> 
                     <img className={classes.img} src={profileimg} alt="user"/>
                     Admin

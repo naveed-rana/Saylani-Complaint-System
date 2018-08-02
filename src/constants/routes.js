@@ -14,3 +14,5 @@ export const NEWMANGER = '/admin/add-manager';
 export const MANAGERS = '/admin/managers';
 export const ADMINACCOUNT = '/admin/account';
 export const HISTORY = '/home/history';
+export const REJECTEDHISTORY = '/admin/rejected-complaints';
+export const RESOLVEDHISTORY = '/admin/resolved-comlaints';

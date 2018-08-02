@@ -10,11 +10,13 @@ import {
 
 let intaialstate = {
     complaints: [],
+    rejectedComplaint:[],
+    resolvedComplaint:[],
     managers: [],
     complaintFlag:false,
     managersFlag:false,
     managersError:'',
-    addmanagerFlag:false
+    addmanagerFlag:false,
 
 }
 
@@ -23,11 +25,12 @@ function adminReducer(state = intaialstate, action) {
     switch (action.type) {
         case ALL_COMPLAINT:
             {    
-            
                 let allcomplaints = action.allcomplaints;
                 allcomplaints = allcomplaints.reverse();
                 return { ...state,
                     complaints: allcomplaints,
+                    rejectedComplaint:action.rejectedComplaints.reverse(),
+                    resolvedComplaint:action.resolvedComplaints.reverse(),
                     complaintFlag:true
                 }
             }

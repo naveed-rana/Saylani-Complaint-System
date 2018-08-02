@@ -34,6 +34,8 @@ const App = () =>
         <Route exact path={routes.DASHBOARD} component={() => <Admin/>}/>
         <Route exact path={routes.MANAGERS} component={() => <Admin />}/>
         <Route exact path={routes.NEWMANGER} component={() => <Admin />}/>
+        <Route exact path={routes.REJECTEDHISTORY} component={() => <Admin />}/>
+        <Route exact path={routes.RESOLVEDHISTORY} component={() => <Admin />}/>
         <Route exact path={routes.SHOW_COMPLAINTS} component={() => <HomePage />}/>
         <Route exact path={routes.ADD_COMPLAINT} component={() => <HomePage />}/>
         <Route exact path={routes.ACCOUNT} component={() => <HomePage />}/>

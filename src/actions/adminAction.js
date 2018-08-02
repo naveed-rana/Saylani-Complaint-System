@@ -5,11 +5,12 @@ export const STATUSSUCCESS ="STATUSSUCCESS";
 export const STATUSERROR ="STATUSERROR";
 export const CLEARSTATUSFLAG = "CLEARSTATUSFLAG";
 
-function getRequesterComplaint(allcomplaints) {
-     
+function getRequesterComplaint(allcomplaints,resolvedComplaints,rejectedComplaints) {
     return{
         type:ALL_COMPLAINT,
-        allcomplaints
+        allcomplaints,
+        resolvedComplaints,
+        rejectedComplaints
     }
     
 }
@@ -21,16 +22,25 @@ export function startGetRequesterComplaints() {
         
         
         db.ref('complaints').on('value',(snapshot)=>{
-            var usercomplaints=[];
+                  var usercomplaints=[];
+                  var resolvedComplaints=[];
+                  var rejectedComplaints=[];
                   snapshot.forEach(element => { 
                       let data = element.val();
-                      if(data.complaint_status !=='confirm resolved' && data.complaint_status !=='deleted'){
-                       usercomplaints.push({
-                           id:element.key,
-                          ...data
-                          });}
+                      if(data.complaint_status ==='confirm resolved'){
+                        resolvedComplaints.push(data);
+                      }
+                      else if(data.complaint_status ==='deleted'){
+                        rejectedComplaints.push(data);
+                       }
+                       else{
+                        usercomplaints.push({
+                            id:element.key,
+                            ...data
+                        })
+                       }
                  });     
-         dispatch(getRequesterComplaint(usercomplaints));
+         dispatch(getRequesterComplaint(usercomplaints,resolvedComplaints,rejectedComplaints));
         })    
     }
 }

@@ -23,6 +23,8 @@ import Dashboard from './Dashboard';
 import AdminHome from './Home';
 import AddManger from './AddManger';
 import Managers from './MangeManger';
+import Rejected from './Rejected';
+import Resolved from './Resolved';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -165,7 +167,9 @@ class MiniDrawer extends React.Component {
               <Route exact path={routes.NEWMANGER} component={() => <AddManger />} />
 
               <Route exact path={routes.MANAGERS} component={() => <Managers />} />
-              {/* <Route exact path={routes.ADMINACCOUNT} component={() => <AdminAccount />} /> */}
+              <Route exact path={routes.REJECTEDHISTORY} component={() => <Rejected />} />
+              <Route exact path={routes.RESOLVEDHISTORY} component={() => <Resolved />} />
+             
             </Grid>
            
               

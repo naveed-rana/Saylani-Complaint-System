@@ -32,12 +32,6 @@ export const mailFolderListItems = (
       <ListItemText primary="Add Manager" />
     </ListItem>
 
-    <ListItem button >
-      <ListItemIcon>
-       <Icon>account_circle</Icon>
-      </ListItemIcon>
-      <ListItemText primary="Admin Profile" />
-    </ListItem>
    
   </div>
 );
@@ -45,17 +39,17 @@ export const mailFolderListItems = (
 export const otherMailFolderListItems = (
   <div>
     
-    <ListItem button>
+    <ListItem button component={Link} to={routes.REJECTEDHISTORY}>
       <ListItemIcon>
         <DeleteIcon />
       </ListItemIcon>
-      <ListItemText primary="Help" />
+      <ListItemText primary="Rejected Complaints" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to={routes.RESOLVEDHISTORY}>
       <ListItemIcon>
         <ReportIcon />
       </ListItemIcon>
-      <ListItemText primary="Report" />
+      <ListItemText primary="Confirm Resolved" />
     </ListItem>
   </div>
 );

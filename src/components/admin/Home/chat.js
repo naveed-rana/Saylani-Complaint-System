@@ -45,7 +45,11 @@ const styles = theme => ({
     marginBottom: 2,
     fontSize: 40,
     color: '#4080FF'
+  },
+  topBar:{
+    backgroundColor:'peachpuff'
   }
+  
 });
 
 class ChatArea extends Component {
@@ -172,7 +176,7 @@ componentDidUpdate(){
           <ExpansionPanelDetails >
             <Grid container spacing={8} className={classes.details}>
 
-              <Grid item sm={12} md={12}>
+              <Grid item sm={12} md={12} className={classes.topBar}>
                 <Typography variant="title">
                   <img className={classes.img} src={profileimg} alt="user"/> {complaint.requester_name}
                 </Typography>

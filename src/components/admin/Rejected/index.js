@@ -1,4 +1,4 @@
-import TablePaginationActionsWrapped from '../admin/Home/TablePagination';
+import TablePaginationActionsWrapped from '../Home/TablePagination';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
@@ -12,13 +12,14 @@ import Paper from '@material-ui/core/Paper';
 import TableHead from '@material-ui/core/TableHead';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import {startGetUserComplaintsHistory} from '../../actions';
+import Typography from '@material-ui/core/Typography';
+
 var jsPDF = require('jspdf');
 require('jspdf-autotable');
 
 const styles = theme => ({
     root: {
-        width: '82vw',
+        width: '90vw',
         textAlign: 'left'
     },
     table: {
@@ -26,11 +27,15 @@ const styles = theme => ({
     },
     tableWrapper: {
         overflowX: 'auto'
-    },
+    }, paper1: {
+        marginBottom:10,
+        padding: 15,
+        borderRadius: '0'
+      },
   
 });
 
-class History extends React.Component {
+class Rejected extends React.Component {
     constructor(props) {
         super(props);
 
@@ -38,10 +43,6 @@ class History extends React.Component {
             page: 0,
             rowsPerPage: 5
         };
-    }
-
-    componentDidMount() {
-        this.props.startGetUserComplaintsHistory(this.props.uid);
     }
 
 
@@ -57,7 +58,7 @@ class History extends React.Component {
         data = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
         
         var columns = [
-            { title: "Branch Incharge", dataKey: "brach_incharge" },
+            { title: "Requseter", dataKey: "requester_name" },
             { title: "Branch Name", dataKey:"brach_name" },
             { title: "Complaint Discription", dataKey:"complaint_discription" },
             { title: "Special Request", dataKey:"special_request" },
@@ -70,13 +71,13 @@ class History extends React.Component {
         doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        doc.text("List of my resolved and rejected complaints", 10, 50);
+        doc.text("List of Rejected complaints", 10, 50);
         doc.autoTable(columns, rows, {
           startY: 70,
           margin: { horizontal: 10 },
           styles: { overflow: 'linebreak' },
           bodyStyles: { valign: 'top' },
-          columnStyles: { brach_incharge: { columnWidth: 70 },
+          columnStyles: { requester_name: { columnWidth: 70 },
           brach_name: { columnWidth: 70 },
           complaint_discription: { columnWidth: 180},
           special_request: { columnWidth: 120 },
@@ -84,18 +85,22 @@ class History extends React.Component {
           date_time: { columnWidth: 70 } } ,
           theme: "striped"
         });
-        doc.save('complaints2.pdf');
+        doc.save('Rejected_Complaints.pdf');
     }
 
     render() {
-        const {classes,historyFlag,historyComlaint} = this.props;
+        const {classes,historyComlaint} = this.props;
         const {rowsPerPage, page} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, historyComlaint.length - page * rowsPerPage);
         var no = 0;
         return (
              
             <div>
-                
+                <Paper className={classes.paper1} elevation={5}>
+                        <Typography variant="title">
+                            Rejected Complaints
+                        </Typography>
+                    </Paper>
                 <Paper className={classes.root}>
                     <div className={classes.tableWrapper}>
                       
@@ -103,20 +108,20 @@ class History extends React.Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>No.</TableCell>
-                                    <TableCell >City Incharge</TableCell>
+                                    <TableCell >Requseter</TableCell>
                                     <TableCell >Branch Incharge</TableCell>
                                     <TableCell >Complaint Discription</TableCell>
                                     <TableCell >Complaint Status</TableCell>
                                     <TableCell className="textRight">Created At 
 
-                                        <b><a onClick={()=>this.createJsPDF(historyComlaint,page,rowsPerPage)} >Download PDF</a></b>
+                                        <br/><b><a onClick={()=>this.createJsPDF(historyComlaint,page,rowsPerPage)} >Download PDF</a></b>
                                     </TableCell>
                                     {/* <TableCell >DeleteAll</TableCell> */}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 
-                            {historyFlag ?
+                            {historyComlaint.length>0 ?
                                 historyComlaint.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((complaint,i) => {
                                         no++
@@ -125,7 +130,7 @@ class History extends React.Component {
                                                 <TableCell component="th" scope="row">
                                                    {no}
                                                 </TableCell>
-                                                <TableCell >{complaint.city_incharge}</TableCell>
+                                                <TableCell >{complaint.requester_name}</TableCell>
                                                 <TableCell>{complaint.brach_incharge}</TableCell>
                                                 <TableCell >{complaint.complaint_discription}</TableCell>
                                                 <TableCell >{complaint.complaint_status}</TableCell>
@@ -166,13 +171,11 @@ class History extends React.Component {
     }
 }
 
-History.propTypes = {
+Rejected.propTypes = {
     classes: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-    uid:state.userState.user.uid,
-    historyFlag:state.userComplaints.historyFlag,
-    historyComlaint:state.userComplaints.historyComlaint
+    historyComlaint:state.adminReducer.rejectedComplaint
 })
 
-export default compose(withStyles(styles), connect(mapStateToProps, {startGetUserComplaintsHistory}))(History);
+export default compose(withStyles(styles), connect(mapStateToProps,null))(Rejected);

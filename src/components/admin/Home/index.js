@@ -143,7 +143,6 @@ class AdminHome extends React.Component {
 
     const {classes, flag} = this.props;
     const {data, rowsPerPage, page} = this.state;
-    var no = 0;
 
     return (
       
@@ -157,7 +156,7 @@ class AdminHome extends React.Component {
           <Grid container spacing={8}>
             <Grid item sm={1} md={1}>
               <Typography variant="body2">
-                No.
+                Complaint No.
               </Typography>
             </Grid>
             <Grid item sm={1} md={1} align="center">
@@ -223,9 +222,8 @@ class AdminHome extends React.Component {
             ? data.length>0 ?
               data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((complaint,i) => {
-                no++;
                 return (
-               <ChatArea key={i} complaint={complaint} no={no} />
+               <ChatArea key={i} complaint={complaint} />
                 );
               })
               :

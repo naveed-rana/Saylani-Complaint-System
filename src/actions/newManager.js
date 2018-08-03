@@ -38,7 +38,7 @@ export function startGetNewManager(manager) {
           if(user.data.uid){
             doCreateUser(user.data.uid,manager)
                 .then(() => {
-                    dispatch(getNewManager(manager));
+                    dispatch(getNewManager({uid:user.data.uid,...manager}));
                 })
                 .catch(error => {
                 dispatch(errorCreatingManager(error));
@@ -69,11 +69,11 @@ function getManagers(managers) {
 export function startGetManagers(){
     return (dispatch) =>{
         onceGetUsers().then((snapshot) =>{
-            let managers =[];
+            let managers = [];
             snapshot.forEach((element=>{
                 let manager = element.val();
               if(manager.branch_code){
-                managers.push(manager);
+                managers.push({uid:element.key,...manager});
               }
             }));
            dispatch(getManagers(managers));  
@@ -88,4 +88,34 @@ export function messageClear() {
         return {
             type:CLEARERROR
         }
+}
+
+//update a user
+
+export function updateUser(data) {
+    return (dispatch) =>{
+        var  updateClientUser = functions.httpsCallable('updateClientUser');
+        updateClientUser({
+            uid: data.uid,
+            password: data.password
+        }).then((user)=>{
+          if(user.data.uid){
+            doCreateUser(user.data.uid)
+                .then(() => {
+                    dispatch(getNewManager());
+                })
+                .catch(error => {
+                dispatch(errorCreatingManager(error));
+                });
+        }
+       else{
+         dispatch(errorCreatingManager(user.data.errorInfo.message));
+       }
+    }
+        ).catch((err) => {
+            dispatch(errorCreatingManager(err))
+        });
+
+    
+    }
 }

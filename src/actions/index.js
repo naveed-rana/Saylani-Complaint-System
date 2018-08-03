@@ -155,11 +155,11 @@ export function startGetComplaintId() {
     return(dispatch) =>{
         
     db.ref('complaints').limitToLast(1).on('child_added',(snapshot)=>{
-        alert(snapshot.val().id);
-        if(snapshot.val().id){
-        dispatch(getComplaintId(snapshot.val().id));
+        if(snapshot.val().comlaintid){
+        dispatch(getComplaintId(snapshot.val().comlaintid));
         }else{
-            dispatch(getComplaintId(1));
+           
+            dispatch(getComplaintId(0));
         }
     })
     }

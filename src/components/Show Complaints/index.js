@@ -61,7 +61,6 @@ class ShowComplaints extends React.Component {
   render() {
     const {classes,flag} = this.props;
     const { rowsPerPage, page} = this.state;
-    var no = 0;
 
     return (
       <div >
@@ -70,7 +69,7 @@ class ShowComplaints extends React.Component {
           <Grid container spacing={8}>
             <Grid item sm={1} md={1}>
               <Typography variant="body2">
-                No.
+                Complaint No.
               </Typography>
             </Grid>
             <Grid item sm={2} md={2}>
@@ -107,9 +106,8 @@ class ShowComplaints extends React.Component {
             ? this.props.myComplaints
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((complaint,i) => {
-                no++;
                 return (
-                  <ChatArea key={i} complaint={complaint} no={no} />
+                  <ChatArea key={i} complaint={complaint} />
                 );
               })
             : 

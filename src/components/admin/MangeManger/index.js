@@ -60,6 +60,8 @@ class Mangers extends React.Component {
         const {rowsPerPage, page} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, managers.length - page * rowsPerPage);
         var no = 0;
+        console.log(managers);
+        
         return (
              
             <div>
@@ -75,9 +77,10 @@ class Mangers extends React.Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>No.</TableCell>
-                                    <TableCell >Branch Manager</TableCell>
+                                    <TableCell >Branch Incharge</TableCell>
                                     <TableCell >Branch Name</TableCell>
                                     <TableCell >Branch Code</TableCell>
+                                    <TableCell >Branch Email</TableCell>
                                     <TableCell >Account Created!</TableCell>
                                     {/* <TableCell >DeleteAll</TableCell> */}
                                 </TableRow>
@@ -95,6 +98,7 @@ class Mangers extends React.Component {
                                                 <TableCell >{manager.username}</TableCell>
                                                 <TableCell>{manager.branch_name}</TableCell>
                                                 <TableCell >{manager.branch_code}</TableCell>
+                                                <TableCell >{manager.email}</TableCell>
                                                 <TableCell >{manager.dated}</TableCell>
                                             </TableRow>
                                         );
@@ -111,7 +115,7 @@ class Mangers extends React.Component {
                             <TableFooter>
                                 <TableRow>
                                     <TablePagination
-                                        colSpan={5}
+                                        colSpan={6}
                                         count={managers.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}

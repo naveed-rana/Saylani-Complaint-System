@@ -92,7 +92,6 @@ class Resolved extends React.Component {
         const {classes,historyComlaint} = this.props;
         const {rowsPerPage, page} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, historyComlaint.length - page * rowsPerPage);
-        var no = 0;
         return (
              
             <div>
@@ -107,7 +106,7 @@ class Resolved extends React.Component {
                         <Table className="">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>No.</TableCell>
+                                    <TableCell>Complaint No.</TableCell>
                                     <TableCell >Requester</TableCell>
                                     <TableCell >Branch Incharge</TableCell>
                                     <TableCell >Complaint Discription</TableCell>
@@ -124,11 +123,11 @@ class Resolved extends React.Component {
                             {historyComlaint.length>0 ?
                                 historyComlaint.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((complaint,i) => {
-                                        no++
+                                    
                                         return (
                                             <TableRow key={i}>
                                                 <TableCell component="th" scope="row">
-                                                   {no}
+                                                   {complaint.comlaintid}
                                                 </TableCell>
                                                 <TableCell >{complaint.requester_name}</TableCell>
                                                 <TableCell>{complaint.brach_incharge}</TableCell>

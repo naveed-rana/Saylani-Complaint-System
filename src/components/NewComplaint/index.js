@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {startAddComplaint, clearFlag,startGetComplaintId} from '../../actions/index';
 import {withRouter} from 'react-router-dom';
 import {toast} from 'react-toastify';
+import Loader from '../ProgressCircle';
 
 const updateByPropertyName = (propertyName, value) => () => ({[propertyName]: value});
 
@@ -23,11 +24,10 @@ class NewComplaint extends Component {
     }
 
     componentDidMount() {
-        //this.props.startGetComplaintId();
+        this.props.startGetComplaintId();
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         this.setState({loading: false});
   
         if (nextProps.flag) {
@@ -51,9 +51,9 @@ class NewComplaint extends Component {
         this.setState({loading: true});
         var currentdate = new Date();
         var datetime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
-
+        var uid = this.props.complaintId + 1;
         var new_complaint = {
-
+            comlaintid:uid,
             requester: this.props.user.uid,
             city_incharge: this.state.city_incharge,
             brach_incharge: this.state.brach_incharge,
@@ -80,9 +80,9 @@ class NewComplaint extends Component {
             complaint_discription,
             priority_level,
             loading,
-            complaintId
         } = this.state;
-        const isValid = city_incharge === '' || brach_name === '' || brach_incharge === '' || complaint_discription === '' || priority_level === '' || loading
+        const isValid = city_incharge === '' || brach_name === '' || brach_incharge === '' || complaint_discription === '' || priority_level === '' || loading;
+        var complaintid =this.props.complaintId+1;
         return (
             <div>
                 <div className="row">
@@ -91,6 +91,7 @@ class NewComplaint extends Component {
                             <div className="card-content black-text">
                                 <span className="card-title">Request a New Complaint</span>
                                 <div className="row pad">
+                                {this.props.complaintId>=0?
                                     <form onSubmit={this.onSubmit}>
                                         <div className="col s12">
                                             <div className="row">
@@ -100,7 +101,7 @@ class NewComplaint extends Component {
                                                     <span className="helper-text labels" data-error="wrong" data-success="right">Complaint ID</span>
                                                     <input
                                                 
-                                                        value="21"
+                                                        value={complaintid}
                                                         readOnly
                                                         type="text"
                                                         id="autocomplete-input343"
@@ -199,8 +200,9 @@ class NewComplaint extends Component {
                                             </button>
                                         </div>
                                     </form>
+                                    :<Loader/>}
                                 </div>
-
+                              
                             </div>
 
                         </div>

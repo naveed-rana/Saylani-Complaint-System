@@ -198,7 +198,7 @@ handleChange = panel => (event, expanded) => {
                 <Grid container spacing={8}>
                   <Grid item sm={1} md={1}>
                     <Typography variant="body1">
-                      {no}
+                      {complaint.comlaintid}
                     </Typography>
                   </Grid>
                   <Grid item sm={1} md={2}>

@@ -27,3 +27,22 @@ exports.createClientUser = functions.https.onCall((data, context) => {
     return userdata;
   });
   
+  exports.updateClientUser = functions.https.onCall((data, context) => {
+      console.log('==================from update a user==================');
+      console.log(context);
+      console.log(data);
+    // let userdata = admin.auth().updateUser(context.uid,{
+    //     password: data.password
+    //   }).then((user)=>{
+    
+    //       return {
+    //           uid:user.uid,
+    //           email:user.email
+    //       };
+    //   })
+    //     .catch((err)=>{
+    //         return err;
+    //     })
+    // return userdata;
+  });
+  

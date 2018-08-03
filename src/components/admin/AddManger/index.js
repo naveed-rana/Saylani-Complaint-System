@@ -143,8 +143,8 @@ class AddManager extends React.Component {
                                     fullWidth={true}
                                     id="input-with-icon-grid6"
                                     value = {branch_manager}
-                                    onChange={event => this.setState(updateByPropertyName('branch_manager', event.target.value))}
-                                    label="Branch Manager"
+                                    onChange={event => this.setState(updateByPropertyName('branch_Incharge', event.target.value))}
+                                    label="Branch Incharge"
                                     required={true}/>
                             </Grid>
                         </Grid>
@@ -165,7 +165,7 @@ class AddManager extends React.Component {
                                     value={manager_email}
                                     fullWidth={true}
                                     id="input-with-icon-grid5"
-                                    label="Manager Email"
+                                    label="Branch Email"
                                     required={true}/>
                             </Grid>
                         </Grid>

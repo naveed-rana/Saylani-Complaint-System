@@ -10,7 +10,7 @@ let INITIAL_STATE = {
 complaints:[],
 flag:false,
 addflag:false,
-complaintId:null,
+complaintId:-1,
 historyComlaint:[],
 historyFlag:false
 

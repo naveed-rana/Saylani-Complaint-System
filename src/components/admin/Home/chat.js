@@ -115,7 +115,7 @@ componentDidUpdate(){
   render() {
   
     
-    const {classes, chatState, complaint, no} = this.props;
+    const {classes, chatState, complaint} = this.props;
     const {expanded} = this.state;
     return (
       <div>
@@ -126,7 +126,7 @@ componentDidUpdate(){
             <Grid container spacing={8}>
               <Grid item sm={1} md={1}>
                 <Typography variant="body1">
-                  {no}
+                  {complaint.comlaintid}
                 </Typography>
               </Grid>
               <Grid item sm={1} md={1}>

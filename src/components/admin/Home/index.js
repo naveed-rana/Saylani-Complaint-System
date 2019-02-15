@@ -17,6 +17,7 @@ import {startGetUser} from '../../../actions';
 import ChatArea from './chat';
 import BranchName from './getBranchNames';
 
+
 const styles = theme => ({
   root: {
     marginTop: 1,
@@ -96,11 +97,6 @@ class AdminHome extends React.Component {
      const priority = this.refs.priorityRef.value;
      const status = this.refs.statusRef.value;
      const branch = this.refs.branchRef.value;
-     
-     
-     console.log(branch);
-     console.log(status);
-     console.log(priority);
      const {copyData} = this.state;
 
      if(priority === 'nill' && status === 'nill' && branch === 'nill'){
@@ -238,7 +234,7 @@ class AdminHome extends React.Component {
             : 
             <ProgressCircle />}
           <Table>
-
+           
             <TableFooter>
               <TableRow>
                 <TablePagination
@@ -271,3 +267,4 @@ const mapStateToProps = state => ({
 export default compose(withStyles(styles), connect(mapStateToProps, {startGetRequesterComplaints,
   startGetUser,
 }))(AdminHome);
+

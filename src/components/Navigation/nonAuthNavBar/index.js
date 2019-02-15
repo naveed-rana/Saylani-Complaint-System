@@ -13,7 +13,10 @@ export  const NavigationNonAuth = () =>
         <Toolbar>
           <Grid container spacing={8}> 
           <Grid item xm={6} md={8}>
-          <Typography variant="title" color="inherit" >
+          <Typography variant="title" color="inherit" style={{
+              position:'relative',
+              top:8
+            }} >
             Saylani Complaint System
           </Typography>
           </Grid>

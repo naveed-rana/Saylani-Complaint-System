@@ -89,6 +89,10 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
   },
+  Positions:{
+    position:'relative',
+    top:8
+  }
 });
 
 class MiniDrawer extends React.Component {
@@ -103,6 +107,10 @@ class MiniDrawer extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+
+  componentDidMount() {
+    document.title = 'Admin'
+  }
 
   render() {
     const { classes, theme } = this.props;
@@ -126,7 +134,7 @@ class MiniDrawer extends React.Component {
             </IconButton>
             <Grid container spacing={8}>
             <Grid item xs={12} sm={9} md={11}>
-            <Typography variant="title" color="inherit">
+            <Typography variant="title" color="inherit" className={classes.Positions}>
               Admin @ Saylani Complaint System
             </Typography>
             </Grid>

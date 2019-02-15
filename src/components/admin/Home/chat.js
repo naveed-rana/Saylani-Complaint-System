@@ -21,7 +21,7 @@ const styles = theme => ({
     paddingRight: 5
   },
   details: {
-    backgroundColor: 'antiquewhite',
+    backgroundColor: '#F2F2F2',
     borderRadius: 5
   },
   textarea: {
@@ -47,7 +47,7 @@ const styles = theme => ({
     color: '#4080FF'
   },
   topBar:{
-    backgroundColor:'peachpuff'
+    backgroundColor:'#4080FF'
   }
   
 });

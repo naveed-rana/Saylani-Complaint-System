@@ -2,6 +2,7 @@ import {
 
     functions
 } from '../firebase/firebase.js';
+
 import {
     onceGetUsers,
     doCreateUser
@@ -35,6 +36,7 @@ export function startGetNewManager(manager) {
             email: manager.email,
             password: manager.manager_password
         }).then((user)=>{
+            
           if(user.data.uid){
             doCreateUser(user.data.uid,manager)
                 .then(() => {

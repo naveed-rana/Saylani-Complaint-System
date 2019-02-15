@@ -21,6 +21,11 @@ class SignInForm extends Component {
       loading:false
     };
   }
+
+ componentDidMount() {
+  document.title = 'Login'
+ }
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.userdata.user.email){
       toast.success("Successfully Login!");
@@ -79,6 +84,7 @@ class SignInForm extends Component {
                         <div className="input-field col s12">
                           <i className="material-icons prefix">account_box</i>
                           <input
+                            autoFocus
                             value={email}
                             onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
                             type="text"

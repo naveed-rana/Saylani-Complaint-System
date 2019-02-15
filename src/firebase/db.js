@@ -18,7 +18,6 @@ export const doAddNewComplaint = (newComplaint) =>
   db.ref('managers').push(newManager);
 
   //chat api
-
   export const doAddNewMessage =(id,message)=>
     db.ref(`chat/${id}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
